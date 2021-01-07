@@ -19,7 +19,7 @@
 # CTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.9)
 
 project(TensileHostLibraryTest)
 
@@ -78,21 +78,7 @@ if(TENSILE_USE_HIP)
 endif()
 
 if(TENSILE_USE_OPENMP)
-    #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_OPENMP")
-    find_package(OpenMP QUIET)
-    if (OPENMP_FOUND)
-        set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-        set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
-    else()
-        if(EXISTS /etc/redhat-release)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp=libgomp")
-        else()
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
-            set(OPENMP_LIBRARY /usr/lib/x86_64-linux-gnu/libomp.so)
-            set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OPENMP_LIBRARY}")
-        endif()
-    endif()
+    find_package(OpenMP REQUIRED)
 endif()
 
 add_subdirectory(configs)
@@ -190,6 +176,6 @@ if(TENSILE_USE_HIP)
 endif()
 
 if(TENSILE_USE_OPENMP)
-    target_link_libraries(TensileTests PRIVATE "${OpenMP_EXE_LINKER_FLAGS}")
+    target_link_libraries(TensileTests PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
