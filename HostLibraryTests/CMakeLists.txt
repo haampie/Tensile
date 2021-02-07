@@ -19,7 +19,7 @@
 # CTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.16)
 
 project(TensileHostLibraryTest)
 

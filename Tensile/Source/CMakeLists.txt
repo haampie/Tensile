@@ -19,7 +19,7 @@
 # CTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 # Override all paths arguments as they do not work properly
 list(APPEND CMAKE_PREFIX_PATH $ENV{ROCM_PATH} /opt/rocm)
